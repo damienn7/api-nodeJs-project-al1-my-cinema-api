@@ -1,0 +1,39 @@
+{
+  "name": "api-nodejs-project-al1-my-cinema-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "npx nodemon -e ts --exec ts-node ./src/main.ts",
+    "start:dev:ts": "npx nodemon -e ts --exec \"tsc && node ./dist/main.ts\"",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damienn7/api-nodeJs-project-al1-my-cinema-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/damienn7/api-nodeJs-project-al1-my-cinema-api/issues"
+  },
+  "homepage": "https://github.com/damienn7/api-nodeJs-project-al1-my-cinema-api#readme",
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@types/typescript": "^0.4.29",
+    "axios": "^1.8.4",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.14.1",
+    "typeorm": "^0.3.21"
+  }
+}
