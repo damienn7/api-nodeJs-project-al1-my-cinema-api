@@ -3,11 +3,11 @@ services:
     image: postgres:latest
     container_name: postgres_db
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-admin}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
-      POSTGRES_DB: ${POSTGRES_DB:-mydatabase}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:${DB_PORT}"
     volumes:
       - postgres_esgi_data:/var/lib/postgresql/data
 
@@ -15,7 +15,7 @@ services:
     image: adminer
     container_name: adminer_ui
     ports:
-      - "8080:8080"
+      - "${ADMINER_PORT}:${ADMINER_PORT}"
     depends_on:
       - postgres
     environment:
