@@ -70,7 +70,7 @@ describe('Auth API', () => {
     });
 
     expect(res.status).toBe(401);
-    expect(res.body.message).toBe('Identifiants invalides.');
+    expect(res.body.message).toBe('Invalid credentials..');
   });
 
   it('should not login with incorrect password', async () => {
@@ -85,7 +85,7 @@ describe('Auth API', () => {
     });
 
     expect(res.status).toBe(401);
-    expect(res.body.message).toBe('Mot de passe incorrect.');
+    expect(res.body.message).toBe('Invalid credentials..');
   });
 
   it('should refresh access token with valid refresh token', async () => {

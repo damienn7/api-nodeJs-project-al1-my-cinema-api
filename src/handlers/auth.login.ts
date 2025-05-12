@@ -15,12 +15,12 @@ export const login = async (req: Request, res: Response) : Promise<void> => {
 
   const user = await User.findOne({ where: { email }, relations: ['tokens'] });
   if (!user) {
-    res.status(401).json({ message: 'Identifiants invalides.' });
+    res.status(401).json({ message: 'Invalid credentials..' });
     return
   }
   const isValid = await bcrypt.compare(password, user.password);
   if (!isValid) {
-    res.status(401).json({ message: 'Mot de passe incorrect.' });
+    res.status(401).json({ message: 'Invalid credentials..' });
     return
   }
 
