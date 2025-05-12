@@ -12,14 +12,14 @@ export class User extends BaseEntity {
     @Column()
     public password: string = '';
 
-    @OneToMany(() => Token, (token) => token.token)
-    tokens: Token[] = [];
+    @OneToMany(() => Token, (token) => token.user)
+    tokens!: Token[];
 
     @CreateDateColumn({ type: "timestamptz" })
-    public createdAt!: Date; // timestamp with timezone -> timestamptz
+    public createdAt!: Date;
 
     @UpdateDateColumn({ type: "timestamptz" })
-    public updatedAt!: Date; // timestamp with timezone -> timestamptz
+    public updatedAt!: Date;
 
     // constructor(
     //     id: number,

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import { ObjectSchema } from 'joi';
+import { UserAuthRequest } from "../types/express";
 
 export const validateAuthBody = (schema: ObjectSchema) : RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) : void => {
@@ -13,7 +14,7 @@ export const validateAuthBody = (schema: ObjectSchema) : RequestHandler => {
   };
 };
 
-export const authMiddleware = (req: Request, res: Response, next: NextFunction): void => {
+export const authMiddleware = (req: UserAuthRequest, res: Response, next: NextFunction): void => {
     const authHeader = req.headers.authorization;
 
     if (

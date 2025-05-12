@@ -44,5 +44,9 @@ export const login = async (req: Request, res: Response) : Promise<void> => {
     accessToken: token,
     refreshToken: refreshToken,
   });
+  // res.status(200).json({
+  //   token,
+  //   refreshToken,
+  // });
   return;
 };

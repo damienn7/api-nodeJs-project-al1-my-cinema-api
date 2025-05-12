@@ -15,13 +15,13 @@ export class Token extends BaseEntity {
   public id!: number;
 
   @Column()
-  public token: string = ''; // Access token, ou string unique (optionnel si seulement refreshToken est utile)
+  public token: string = '';
 
   @Column()
-  public refreshToken: string = ''; // Chaîne aléatoire, pas un JWT
+  public refreshToken: string = '';
 
   @Column()
-  public expiresAt!: Date; // Date d'expiration du refresh token
+  public expiresAt!: Date;
 
   @ManyToOne(() => User, (user) => user.tokens, { onDelete: "CASCADE" })
   public user!: User;

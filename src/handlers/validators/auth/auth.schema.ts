@@ -13,3 +13,7 @@ export const loginSchema = Joi.object({
 export const refreshSchema = Joi.object({
   refreshToken: Joi.string().required(),
 });
+
+export const logoutSchema = Joi.object({
+  refreshToken: Joi.string().required(),
+});

@@ -1,8 +1,9 @@
 // src/controllers/auth/logoutAll.ts
 import { Request, Response } from 'express';
 import { Token } from '../db/models/token';
+import { UserAuthRequest } from '../types/express';
 
-export const logoutAll = async (req: Request, res: Response): Promise<void> => {
+export const logoutAll = async (req: UserAuthRequest, res: Response): Promise<void> => {
   if (!req.user) {
     res.status(401).json({ message: 'Unauthorized' });
     return;

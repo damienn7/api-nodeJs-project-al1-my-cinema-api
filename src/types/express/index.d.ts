@@ -1,7 +1,7 @@
-import 'express';
+import { Request } from 'express';
 
-declare module 'express' {
-    export interface Request {
-        user?: { id: number};
-    }
+export interface UserAuthRequest extends Request {
+  user?: {
+    id: number;
+  };
 }
