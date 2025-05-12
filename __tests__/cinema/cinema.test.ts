@@ -24,7 +24,7 @@ describe('Cinema API', () => {
 
   beforeEach(async () => {
     await setupTestUsers();
-    await AppDataSource.getRepository(Cinema).createQueryBuilder().delete().execute();
+    await AppDataSource.getRepository(Cinema).createQueryBuilder().delete().execute();  
   });
 
   it('should allow ADMIN to create a cinema', async () => {
