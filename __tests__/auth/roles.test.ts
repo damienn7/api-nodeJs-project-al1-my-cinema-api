@@ -4,8 +4,6 @@ import { AppDataSource } from '../../src/db/database';
 import { User } from '../../src/db/models/user';
 import { Token } from '../../src/db/models/token';
 
-type UserType = { email: string; password: string; role: string };
-
 beforeAll(async () => {
   await AppDataSource.initialize();
 });
