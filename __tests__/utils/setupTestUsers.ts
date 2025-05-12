@@ -14,8 +14,8 @@ export const tokens: Record<string, string> = {};
 
 export const setupTestUsers = async () => {
 
-  await AppDataSource.getRepository(Token).delete({});
-  await AppDataSource.getRepository(User).delete({});
+    await AppDataSource.getRepository(Token).createQueryBuilder().delete().execute();
+    await AppDataSource.getRepository(User).createQueryBuilder().delete().execute();
 
   for (const { email, password } of Object.values(users)) {
     await request(app).post('/auth/register').send({ email, password });
