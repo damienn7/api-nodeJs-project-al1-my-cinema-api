@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app } from '../../src/main';
+import { app } from '../../src/app';
 import { AppDataSource } from '../../src/db/database';
 import { User } from '../../src/db/models/user';
 

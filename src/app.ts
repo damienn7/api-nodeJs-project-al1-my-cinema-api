@@ -1,15 +1,13 @@
-import {app} from './main';
-import { AppDataSource } from './db/database';
+import express from 'express';
+import { initHandlers } from './handlers/handler';
+import bodyParser from 'body-parser';
+import 'dotenv/config';
 
-const port = process.env.PORT || 3000;
+const app = express();
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log('📦 Database initialized');
-    app.listen(port, () => {
-      console.log(`🚀 Server is listening on http://localhost:${port}`);
-    });
-  })
-  .catch((error) => {
-    console.error('❌ DB initialization failed:', error);
-  });
+app.use(express.json());
+app.use(bodyParser.json({ limit: '50mb', type: 'application/*+json' }));
+
+initHandlers(app);
+
+export { app };
