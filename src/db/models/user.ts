@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import { Token } from "./token";
+import { UserRole } from "../../types/user";
 
 @Entity({name: "user"})
 export class User extends BaseEntity {
@@ -11,6 +12,9 @@ export class User extends BaseEntity {
 
     @Column()
     public password: string = '';
+
+    @Column({ type: 'varchar', default: 'USER' })
+    role!: UserRole;
 
     @OneToMany(() => Token, (token) => token.user)
     tokens!: Token[];

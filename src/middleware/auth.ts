@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import { ObjectSchema } from 'joi';
 import { UserAuthRequest } from "../types/express";
+import { UserRole } from "../types/user";
 
 export const validateAuthBody = (schema: ObjectSchema) : RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) : void => {
@@ -28,11 +29,28 @@ export const authMiddleware = (req: UserAuthRequest, res: Response, next: NextFu
     const token = authHeader.split(" ")[1];
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {id: number};
-        req.user = {id: decoded.id};
+        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {id: number, role: UserRole};
+        req.user = {id: decoded.id, role: decoded.role};
         next();
     } catch (err) {
         res.status(403).json({ message: "Invalid or expired token" });
         return
     }
+};
+
+export const authRoles = (...allowedRoles: UserRole[]) => {
+  return (req: UserAuthRequest, res: Response, next: NextFunction): void => {
+    if (!req.user) {
+      res.status(401).json({ message: 'Unauthorized' });
+      return;
+    }
+
+    const userRole = req.user.role;
+    if (!allowedRoles.includes(userRole)) {
+      res.status(403).json({ message: 'Forbidden: insufficient role' });
+      return;
+    }
+
+    next();
+  };
 };

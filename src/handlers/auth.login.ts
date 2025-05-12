@@ -9,11 +9,12 @@ export const login = async (req: Request, res: Response) : Promise<void> => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    res.status(400).json({ message: 'Email et mot de passe requis.' });
+    res.status(400).json({ message: 'Email or password required.' });
     return
   }
 
-  const user = await User.findOne({ where: { email }, relations: ['tokens'] });
+  // const user = await User.findOne({ where: { email }, relations: ['tokens'] });
+  const user = await User.findOne({ where: { email }});
   if (!user) {
     res.status(401).json({ message: 'Invalid credentials..' });
     return
@@ -24,13 +25,13 @@ export const login = async (req: Request, res: Response) : Promise<void> => {
     return
   }
 
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
+  const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET!, {
     expiresIn: '5m',
   });
 
   const refreshToken = uuidv4();
   const expiresAt = new Date();
-  expiresAt.setDate(expiresAt.getDate() + 7); // Expire dans 7 jours
+  expiresAt.setDate(expiresAt.getDate() + 7);
 
   const tokenEntry = Token.create({
     token,
@@ -44,9 +45,5 @@ export const login = async (req: Request, res: Response) : Promise<void> => {
     accessToken: token,
     refreshToken: refreshToken,
   });
-  // res.status(200).json({
-  //   token,
-  //   refreshToken,
-  // });
   return;
 };
